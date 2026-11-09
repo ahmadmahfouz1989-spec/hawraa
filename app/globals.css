@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/* ألوان الموقع — عدّلها هنا لتتغير في كل مكان */
+@theme {
+  --color-blush: #fce7ef;
+  --color-rose: #e63965;
+  --color-berry: #b83259;
+  --color-gold: #d4af77;
+  --color-cream: #fff9f7;
+  --color-ink: #4a1a2c;
+  --color-ink-soft: #8a5a6a;
+
+  --animate-heartbeat: heartbeat 2.4s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.05); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.03); }
+}
+
+@theme inline {
+  --font-sans: var(--font-tajawal), system-ui, sans-serif;
+  --font-display: var(--font-ruqaa), var(--font-tajawal), serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply text-ink font-sans antialiased;
+    background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-blush) 100%) fixed;
+    min-height: 100dvh;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-rose);
+    outline-offset: 3px;
+    border-radius: 0.75rem;
+  }
+}
+
+@layer components {
+  .card {
+    background: rgb(255 255 255 / 0.7);
+    border: 1px solid rgb(184 50 89 / 0.08);
+    border-radius: 1.75rem;
+    box-shadow: 0 10px 30px -18px rgb(184 50 89 / 0.35);
+  }
+  .btn-love {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-rose px-7 py-3.5 font-bold text-white
+      transition hover:bg-berry active:scale-95 select-none;
+  }
+  .btn-soft {
+    @apply inline-flex items-center justify-center rounded-full border border-berry/20 px-5 py-2.5 text-[0.95rem]
+      font-medium whitespace-nowrap text-berry transition hover:bg-white active:scale-95 select-none;
+  }
+}
+
+/* احترام إعداد "تقليل الحركة" */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
